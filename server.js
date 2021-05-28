@@ -31,7 +31,7 @@ mongoose.connection.once('open', () => {
 //============== ROUTES ==================
 
 //index
-app.get('/tools' , (req , res) => {
+app.get('/' , (req , res) => {
     Tool.find({} , (error , allTools) => {
         if (error) {
             res.send(error)
