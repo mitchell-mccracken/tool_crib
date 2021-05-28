@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New</title>
+    <link rel="stylesheet" href="/css/skeleton.css">
+    <style>
+        body{ margin-left: 50px;}
+    </style>
+</head>
+<body>
+    <h2>create a new tool</h2>
+    <form action="/tools" method='POST'>
+        Tool Name: <input type="text" name='toolName' > <br>
+        <!-- Tool Type: <input type="text" name ='toolType'> <br> -->
+        Tool Type: <select name="toolType" id="toolType">
+            <option value="drill bit">drill bit</option>
+            <option value="end mill">end mill</option>
+            <option value="face mill">face mill</option>
+        </select> <br>
+        Tool Qty: <input type="number" name='toolQty'> <br>
+        Tool PN: <input type="text" name='toolPartNumber'> <br>
+        Tool Cost: <input type="text" step='any' name='toolCost'> <br>
+        New Tool: <input type="checkbox" name='newTool'> <br>
+        Notes: <input type="text" name='notes'> <br>
+        <input type="submit" name="submit" id="submit"> <br>
+    </form>
+    
+</body>
+</html>

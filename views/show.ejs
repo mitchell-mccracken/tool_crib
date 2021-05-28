@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show</title>
+    <link rel="stylesheet" href="/css/skeleton.css">
+    <style>
+        body{ margin-left: 50px;}
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Tool Name</th>
+            <th><%=tool.toolName%></th>
+        </tr>
+        <tr>
+            <th>Tool Type</th>
+            <th><%=tool.toolType%></th>
+        </tr>
+        <tr>
+        <th>Qty</th>
+            <th><%=tool.toolQty%></th>
+        </tr>
+        <tr>
+        <th>Part Number</th>
+            <th><%=tool.toolPartNumber%></th>
+        </tr>
+        <th>Cost (each)</th>
+            <th>$ <%=tool.toolCost%></th>
+        </tr>
+        <th>Is the tool new?</th>
+            <th><% if (tool.newTool === true) { %>
+                new tool
+                <% } else { %>
+                    used tool
+                <% } %>
+            </th>
+        </tr>
+    </table>
+    <br>
+    <button><a href="/tools/<%=tool.id%>/edit">EDIT TOOL</a></button>
+    <br>
+    <form action="/tools/<%=tool.id%>?_method=DELETE" method='POST'>
+    <input type="submit" value='DELETE'></form>
+    <button><a href="/tools/">BACK</a></button>
+    
+</body>
+</html>
