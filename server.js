@@ -8,7 +8,7 @@ const Tool = require('./models/tools.js');
 //app config
 const app = express();
 const PORT = process.env.PORT || 3000;
-const mongoURI = 'mongodb://localhost:27017/toolcrib';
+const mongoURI = process.env.mongoURI || 'mongodb://localhost:27017/toolcrib';
 
 //express middleware
 app.use(express.urlencoded({ extended: true}));
