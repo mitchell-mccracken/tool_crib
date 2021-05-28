@@ -30,8 +30,13 @@ mongoose.connection.once('open', () => {
 //========================================
 //============== ROUTES ==================
 
-//index
+// redirect for heroku, I added this becuase my root was originally set up as /tools
 app.get('/' , (req , res) => {
+    res.redirect('/tools');
+})
+
+//index
+app.get('/tools' , (req , res) => {
     Tool.find({} , (error , allTools) => {
         if (error) {
             res.send(error)
