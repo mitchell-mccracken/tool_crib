@@ -38,12 +38,26 @@ mongoose.connection.once('open', () => {
     console.log('connected to mongo');
 });
 
+
+// user info for session object
 app.get('/create-session' , (req , res) => {
     req.session.anyProperty = 'any value';
-    console.log(req.session);
+    // console.log(req.session);
 })
 
-
+// retrieve user information saved on the session object
+app.get('/retrieve-session', (req, res) => {
+    //any route will work
+    if (req.session.anyProperty === 'something you want it to') {
+      //test to see if that value exists
+      //do something if it's a match
+      console.log('it matches! cool')
+    } else {
+      //do something else if it's not
+      console.log('nope, not a match')
+    }
+    res.redirect('/')
+  })
 
 
 
