@@ -12,10 +12,25 @@
 </head>
 <body>
     <h1>Tools Index</h1>
+    <table>
+        <tr>
+            <th>Number</th>
+            <th>Tool Name</th>
+            <th>Tool Type</th>
+            <th>Tool Qty</th>
+        </tr>
+        
     <% for (i=0 ; i<tools.length ; i++) { %>
-    <p>Item # <%=i%> is : <a href="/tools/<%=tools[i].id%>"> <%= tools[i].toolName%> </a> </p>
+        <tr>
+        <td><%= i %></td>
+        <td> <a href="/tools/<%=tools[i].id%>"> <%=tools[i].toolName %> </a> </td>
+        <td><%= tools[i].toolType %></td>
+        <td><%= tools[i].toolQty %></td>
+        </tr>
     <% } %>
-    <button><a href="/tools/new">NEW TOOL</a></button>
+        
+    </table>
+    <a href="/tools/new"><button>NEW TOOL</button></a>
     
     
 </body>
