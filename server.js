@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const methodOverride = require('method-override');
 const session = require('express-session');
 require('dotenv').config();     //not sure if this is needed or not
+const sessionsController = require('./controllers/sessions_controller.js');
 
 //import model
 // const Tool = require('./models/tools.js');
@@ -28,6 +29,7 @@ app.use(
     })
   )
 app.use('/users' , userController)
+app.use('/sessions' , sessionsController);
 
 //middleware for delete
 app.use(methodOverride('_method'));
@@ -39,7 +41,7 @@ mongoose.connect(mongoURI, {
     useFindAndModify: false
 });
 mongoose.connection.once('open', () => {
-    console.log('connected to mongo');
+    console.log('connected to mongo on ' + mongoURI);
 });
 
 

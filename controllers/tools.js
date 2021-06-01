@@ -41,7 +41,8 @@ router.get('/tools/new' , (req , res) => {
 router.get('/tools/:id/edit' , (req , res) => {
     Tool.findById(req.params.id , (error , foundTool) => {
         res.render('edit.ejs' , {
-            tool: foundTool
+            tool: foundTool, 
+            // currentUser : req.session.currentUser   //I am getting an error that currentUser is undefined
         })
     })
 } )
