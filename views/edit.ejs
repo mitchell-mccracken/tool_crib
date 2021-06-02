@@ -13,13 +13,19 @@
     <%- include('partials/userbar')  %>
     <form action="/tools/<%=tool.id%>?_method=PUT" method='POST'>
         Tool Name: <input type="text" name='toolName' value='<%=tool.toolName%>'> <br>
-        Tool Type: <input type="text" name ='toolType' value='<%=tool.toolType%>'> <br>
+        Tool Type: <select name="toolType" id="toolType" >
+            <option value="<%=tool.toolType%>"><%=tool.toolType%></option>
+            <option value="drill bit">drill bit</option>
+            <option value="end mill">end mill</option>
+            <option value="face mill">face mill</option>
+        </select> <br>
+        <!-- Tool Type: <input type="text" name ='toolType' value='<%=tool.toolType%>'> <br> -->
         Tool Qty: <input type="number" name='toolQty' value='<%=tool.toolQty%>'> <br>
         Tool PN: <input type="text" name='toolPartNumber' value='<%=tool.toolPartNumber%>'> <br>
         Tool Cost: <input type="text" name='toolCost' value='<%=tool.toolCost%>'> <br>
         New Tool: <input type="checkbox" name='newTool' > <br>
         Notes: <input type="text" name='notes' value='<%=tool.notes%>'> <br>
-        Last Updated By: <input type="text" name='lastUpdatedBy' value="
+        <input type="hidden" name='lastUpdatedBy' value="
         <% if (currentUser !== undefined) { %>
             <%= currentUser.userName%>
         <% } else { %>
