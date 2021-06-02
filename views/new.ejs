@@ -24,6 +24,13 @@
         Tool Cost: <input type="text" step='any' name='toolCost'> <br>
         New Tool: <input type="checkbox" name='newTool'> <br>
         Notes: <input type="text" name='notes'> <br>
+        Last Updated By: <input type="text" name='lastUpdatedBy' value="
+        <% if (currentUser !== undefined) { %>
+            <%= currentUser.userName%>
+        <% } else { %>
+            N/A
+        <% } %>
+        " readonly> <br>
         <input type="submit" name="submit" id="submit"> <br>
     </form>
     <a href="/tools"><button>BACK</button></a>

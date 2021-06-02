@@ -10,7 +10,6 @@ const Tool = require('../models/tools.js');
 
 // redirect for heroku, I added this becuase my root was originally set up as /tools
 router.get('/' , (req , res) => {
-    // res.redirect('/tools');
     res.render('landingpage.ejs');
 })
 
@@ -30,11 +29,6 @@ router.get('/tools' , (req , res) => {
                 tools: allTools , 
                 currentUser: req.session.currentUser   //this kept coming back as undefined - this is now fixed
             })
-            // if (currentUser === undefined) { 
-            //     console.log('no current user');
-            // } else { console.log('else statement')}
-            // console.log('current user is : ' + currentUser.userName)
-            // console.log(req.session.currentUser);
         }
     })
 })
@@ -65,7 +59,7 @@ router.put('/tools/:id' , (req , res) => {
         req.body.newTool = false;
     }
     Tool.findByIdAndUpdate(req.params.id, req.body, {new: true} , (error , updatedTool) => {
-        res.redirect('/tools/')
+        res.redirect(`/tools/${req.params.id}`)
     })
 })
     

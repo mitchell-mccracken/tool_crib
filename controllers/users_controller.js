@@ -26,17 +26,22 @@ users.get('/' , (req , res) => {
   
 users.post('/', (req, res) => {
 //overwrite the user password with the hashed password, then pass that in to our database
-req.body.userPassword1 = bcrypt.hashSync(req.body.userPassword1, bcrypt.genSaltSync(10))
-User.create(req.body, (err, createdUser) => {           // need to handle error handling for re-entering password
+if ( req.body.userPassword1 === req.body.userPassword2) {
+    req.body.userPassword1 = bcrypt.hashSync(req.body.userPassword1, bcrypt.genSaltSync(10))
+    User.create(req.body, (err, createdUser) => {           // need to handle error handling for re-entering password
     if (err) {
         console.log(err);
     } else {
         console.log('user is created', createdUser)
         console.log(req.body);
         console.log(req.body.userPassword1);
-        res.redirect('/users')
-        }
-    })
+        res.redirect('/tools')
+            }
+        })
+} else {
+    res.send('Passwords do not match!')
+}
+
 })
   
 module.exports = users

@@ -8,6 +8,7 @@ const toolSchema = new mongoose.Schema({
     toolCost: {type: String},
     newTool: {type: Boolean},
     notes: {type: String},
+    lastUpdatedBy: {type: String},
 } , {timestamps: true} )
 
 const Tool = mongoose.model('Tool' , toolSchema);
