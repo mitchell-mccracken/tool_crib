@@ -19,7 +19,6 @@ const mongoURI = process.env.mongoURI || 'mongodb://localhost:27017/toolcrib';
 //express middleware
 app.use(express.urlencoded({ extended: true}));
 app.use(express.static('public'));
-app.use(toolsController);
 app.use(
     session({
         // secret: 'this is a test',   //I added this to test if my env file is not properly linked
@@ -28,8 +27,6 @@ app.use(
       saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
     })
   )
-app.use('/users' , userController)
-app.use('/sessions' , sessionsController);
 
 //middleware for delete
 app.use(methodOverride('_method'));
@@ -43,6 +40,10 @@ mongoose.connect(mongoURI, {
 mongoose.connection.once('open', () => {
     console.log('connected to mongo on ' + mongoURI);
 });
+
+app.use('/users' , userController);
+app.use('/sessions' , sessionsController);
+app.use(toolsController);
 
 
 // user info for session object

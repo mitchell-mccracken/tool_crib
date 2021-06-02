@@ -5,7 +5,6 @@ const router = express.Router();
 const Tool = require('../models/tools.js');
 
 
-
 //========================================
 //============== ROUTES ==================
 
@@ -14,20 +13,23 @@ router.get('/' , (req , res) => {
     res.redirect('/tools');
 })
 
-//login
+//login , I don't think I use this route ever
 router.get('/login' , (req , res) => {
     res.render('login.ejs');
 })
 
 //index
 router.get('/tools' , (req , res) => {
+    console.log(req.session.currentUser);
     Tool.find({} , (error , allTools) => {
         if (error) {
             res.send(error)
         } else {
             res.render('index.ejs' , {
-                tools: allTools
+                tools: allTools , 
+                currentUser: req.session.currentUser   //this kept coming back as undefined - this is now fixed
             })
+            // console.log(req.session.currentUser);
         }
     })
 })
@@ -89,7 +91,8 @@ router.get('/tools/:id' , (req , res) => {
     Tool.findById(req.params.id , (error , selectedTool) => {
         // res.send(selectedTool);
         res.render('show.ejs' , {
-            tool: selectedTool
+            tool: selectedTool,
+            currentUser: req.session.currentUser 
         })
     })
 })

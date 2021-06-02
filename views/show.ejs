@@ -39,6 +39,19 @@
                 <% } %>
             </th>
         </tr>
+        <tr>
+            <th>Created Timestamp</th>
+            <th> <%=tool.createdAt%> </th>
+        </tr>
+        <tr>
+            <th>Updated Timestamp</th>
+            <th> <%=tool.updatedAt%> </th>
+        </tr>
+        <tr>
+            <th>Last Updated By:</th>
+            <th> <%=currentUser.userName%> </th>
+            <!-- I think I need to have a way to pull in the req.session.currentUser information -->
+        </tr>
     </table>
     <br>
     <a href="/tools/<%=tool.id%>/edit"><button>EDIT TOOL</button></a>
