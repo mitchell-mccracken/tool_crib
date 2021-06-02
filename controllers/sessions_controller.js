@@ -24,8 +24,9 @@ sessions.post('/', (req, res) => {
 
   // Step 1 Look for the username
 
-  User.findOne({ username: req.body.username }, (err, foundUser) => {
+  User.findOne({ userName: req.body.userName }, (err, foundUser) => {
     // Database error
+    console.log(req.body);
     if (err) {
       console.log(err)
       res.send('oops the db had a problem')
@@ -35,7 +36,7 @@ sessions.post('/', (req, res) => {
     } else {
       // user is found yay!
       // now let's check if passwords match
-      if (bcrypt.compareSync(req.body.password, foundUser.password)) {
+      if (bcrypt.compareSync(req.body.userPassword1, foundUser.userPassword1)) {
         // add the user to our session
         req.session.currentUser = foundUser
         // redirect back to our home page
