@@ -4,11 +4,13 @@ const sessions = express.Router()
 const User = require('../models/users.js')
 
 sessions.get('/new', (req, res) => {
-  res.render('login.ejs', { currentUser: req.session.currentUser })
+  res.render('login.ejs', { currentUser: req.session.userName })
+  console.log(req.session.userName);
 })
 
 // on sessions form submit (log in)
 sessions.post('/', (req, res) => {
+    // res.send(req.body)
   // username is found and password matches
   // successful log in
 
@@ -21,6 +23,7 @@ sessions.post('/', (req, res) => {
   // some weird thing happened???????
 
   // Step 1 Look for the username
+
   User.findOne({ username: req.body.username }, (err, foundUser) => {
     // Database error
     if (err) {
@@ -43,6 +46,7 @@ sessions.post('/', (req, res) => {
       }
     }
   })
+
 })
 
 sessions.delete('/', (req, res) => {
