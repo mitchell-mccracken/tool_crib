@@ -6,12 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New</title>
     <link rel="stylesheet" href="/css/skeleton.css">
-    <style>
-        body{ margin-left: 50px;}
-    </style>
+    <link rel="stylesheet" href="/css/userbar.css">
 </head>
 <body>
     <h2>create a new tool</h2>
+    <%- include('partials/userbar')  %>
     <form action="/tools" method='POST'>
         Tool Name: <input type="text" name='toolName' > <br>
         <!-- Tool Type: <input type="text" name ='toolType'> <br> -->

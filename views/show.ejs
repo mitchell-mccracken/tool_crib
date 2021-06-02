@@ -6,11 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show</title>
     <link rel="stylesheet" href="/css/skeleton.css">
-    <style>
-        body{ margin-left: 50px;}
-    </style>
+    <link rel="stylesheet" href="/css/userbar.css">
 </head>
 <body>
+    <%- include('partials/userbar')  %>
     <table>
         <tr>
             <th>Tool Name</th>
@@ -49,7 +48,7 @@
         </tr>
         <tr>
             <th>Last Updated By:</th>
-            <th> <%=currentUser.userName%> </th>
+            <th> THIS IS A PLACEHOLDER!!!! </th>
             <!-- I think I need to have a way to pull in the req.session.currentUser information -->
         </tr>
     </table>

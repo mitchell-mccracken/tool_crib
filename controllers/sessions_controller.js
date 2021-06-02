@@ -14,19 +14,6 @@ sessions.get('/new', (req, res) => {
 
 // on sessions form submit (log in)
 sessions.post('/', (req, res) => {
-    // res.send(req.body)
-  // username is found and password matches
-  // successful log in
-
-  // username is not found - who cares about password if you don't have a username that is found?
-  // unsuccessful login
-
-  // username found but password doesn't match
-  // unsuccessful login
-
-  // some weird thing happened???????
-
-  // Step 1 Look for the username
 
   User.findOne({ userName: req.body.userName }, (err, foundUser) => {
     // console.log('req dot body dot username  ===> ' + userName)
@@ -47,7 +34,7 @@ sessions.post('/', (req, res) => {
         // test to see if req.session exists
         console.log('line 48: req dot session is : ====> ' + req.session.currentUser)
         // redirect back to our home page
-        res.redirect('/')
+        res.redirect('/tools')
       } else {
         // passwords do not match
         res.send('<a href="/"> password does not match </a>')

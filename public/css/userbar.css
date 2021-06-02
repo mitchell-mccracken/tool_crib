@@ -1,0 +1,10 @@
+body{ 
+    margin-left: 50px;
+}
+.inline{
+    display: flex;
+    flex-direction: row;
+}
+h4{
+    margin-right: 25px;
+}

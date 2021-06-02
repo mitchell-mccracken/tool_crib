@@ -10,7 +10,8 @@ const Tool = require('../models/tools.js');
 
 // redirect for heroku, I added this becuase my root was originally set up as /tools
 router.get('/' , (req , res) => {
-    res.redirect('/tools');
+    // res.redirect('/tools');
+    res.render('landingpage.ejs');
 })
 
 //login , I don't think I use this route ever
@@ -29,6 +30,10 @@ router.get('/tools' , (req , res) => {
                 tools: allTools , 
                 currentUser: req.session.currentUser   //this kept coming back as undefined - this is now fixed
             })
+            // if (currentUser === undefined) { 
+            //     console.log('no current user');
+            // } else { console.log('else statement')}
+            // console.log('current user is : ' + currentUser.userName)
             // console.log(req.session.currentUser);
         }
     })
@@ -36,7 +41,9 @@ router.get('/tools' , (req , res) => {
 
 // ===================== NEW ==========================
 router.get('/tools/new' , (req , res) => {
-    res.render('new.ejs');
+    res.render('new.ejs' , {
+        currentUser: req.session.currentUser
+    });
 })
 
 // ===================== EDIT ==========================
@@ -44,7 +51,7 @@ router.get('/tools/:id/edit' , (req , res) => {
     Tool.findById(req.params.id , (error , foundTool) => {
         res.render('edit.ejs' , {
             tool: foundTool, 
-            // currentUser : req.session.currentUser   //I am getting an error that currentUser is undefined
+            currentUser : req.session.currentUser   //I am getting an error that currentUser is undefined
         })
     })
 } )
