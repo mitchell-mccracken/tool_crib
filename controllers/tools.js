@@ -4,6 +4,15 @@ const router = express.Router();
 //import model
 const Tool = require('../models/tools.js');
 
+//functions
+const isAuthenticated = (req , res, next) => {
+    if(req.session.currentUser) {
+        return next()
+    } else {
+        res.send('You need to be logged in to do this')
+    }
+}
+
 
 //========================================
 //============== ROUTES ==================
@@ -45,13 +54,13 @@ router.get('/tools/:id/edit' , (req , res) => {
     Tool.findById(req.params.id , (error , foundTool) => {
         res.render('edit.ejs' , {
             tool: foundTool, 
-            currentUser : req.session.currentUser   //I am getting an error that currentUser is undefined
+            currentUser : req.session.currentUser   
         })
     })
 } )
 
 // ===================== UPDATE ==========================
-router.put('/tools/:id' , (req , res) => {
+router.put('/tools/:id' , isAuthenticated , (req , res) => {
     console.log(req.body);
     if (req.body.newTool === 'on') {
         req.body.newTool = true;
@@ -65,9 +74,12 @@ router.put('/tools/:id' , (req , res) => {
     
 
 // ===================== CREATE ==========================
-router.post('/tools' , (req , res) => {
+router.post('/tools' , isAuthenticated , (req , res) => {
     // console.log(req.body.notes);
     // res.send(req.body.newTool);
+
+    //=== attempt to only allow if user is logged in ===
+
     if (req.body.newTool === 'on') {
         req.body.newTool = true;
     } else {
@@ -78,11 +90,8 @@ router.post('/tools' , (req , res) => {
         if (error) {
             console.log(error);
         } else {
-            
-            console.log('tool created!!!!');
             res.redirect('/tools');
         }
-        
     })
 })
 
@@ -99,7 +108,7 @@ router.get('/tools/:id' , (req , res) => {
 })
 
 // ===================== DELETE ==========================
-router.delete('/tools/:id' , (req , res) => {
+router.delete('/tools/:id' , isAuthenticated , (req , res) => {
     Tool.findByIdAndRemove(req.params.id , (error , selectedTool) => {
         res.redirect('/tools')
     })
