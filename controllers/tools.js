@@ -9,7 +9,8 @@ const isAuthenticated = (req , res, next) => {
     if(req.session.currentUser) {
         return next()
     } else {
-        res.send('You need to be logged in to do this')
+        res.render('needlogin.ejs');
+        // res.send('You need to be logged in to do this')
     }
 }
 
