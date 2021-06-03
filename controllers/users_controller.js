@@ -35,7 +35,7 @@ if ( req.body.userPassword1 === req.body.userPassword2) {
         console.log('user is created', createdUser)
         console.log(req.body);
         console.log(req.body.userPassword1);
-        res.redirect('/tools')
+        res.redirect('/sessions/new')
             }
         })
 } else {
