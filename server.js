@@ -5,8 +5,6 @@ const session = require('express-session');
 require('dotenv').config();     //not sure if this is needed or not
 const sessionsController = require('./controllers/sessions_controller.js');
 
-//import model
-// const Tool = require('./models/tools.js');
 
 const toolsController = require('./controllers/tools.js');
 const userController = require('./controllers/users_controller.js');
@@ -21,7 +19,6 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.static('public'));
 app.use(
     session({
-        // secret: 'this is a test',   //I added this to test if my env file is not properly linked
       secret: process.env.SECRET, //a random string do not copy this value or your stuff will get hacked
       resave: false, // default more info: https://www.npmjs.com/package/express-session#resave
       saveUninitialized: false // default  more info: https://www.npmjs.com/package/express-session#resave
@@ -44,27 +41,6 @@ mongoose.connection.once('open', () => {
 app.use('/users' , userController);
 app.use('/sessions' , sessionsController);
 app.use(toolsController);
-
-
-// user info for session object
-app.get('/create-session' , (req , res) => {
-    req.session.anyProperty = 'any value';
-    // res.send(req.session);
-})
-
-// retrieve user information saved on the session object
-app.get('/retrieve-session', (req, res) => {
-    //any route will work
-    if (req.session.anyProperty === 'something you want it to') {
-      //test to see if that value exists
-      //do something if it's a match
-      console.log('it matches! cool')
-    } else {
-      //do something else if it's not
-      console.log('nope, not a match')
-    }
-    res.redirect('/')
-  })
 
 
 

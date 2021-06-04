@@ -3,22 +3,16 @@ const express = require('express')
 const sessions = express.Router()
 const User = require('../models/users.js')
 
-// middleware added to hopefully parse the data coming in, this may not be needed
-sessions.use(express.urlencoded({ extended: true}));
-
 
 sessions.get('/new', (req, res) => {
   res.render('login.ejs', { currentUser: req.session.userName })
-  console.log('req. session . user name is ==>' + req.session.userName);
 })
 
 // on sessions form submit (log in)
 sessions.post('/', (req, res) => {
 
   User.findOne({ userName: req.body.userName }, (err, foundUser) => {
-    // console.log('req dot body dot username  ===> ' + userName)
     // Database error
-    console.log(req.body);
     if (err) {
       console.log(err)
       res.send('oops the db had a problem')
@@ -31,8 +25,6 @@ sessions.post('/', (req, res) => {
       if (bcrypt.compareSync(req.body.userPassword1, foundUser.userPassword1)) {
         // add the user to our session
         req.session.currentUser = foundUser
-        // test to see if req.session exists
-        console.log('line 48: req dot session is : ====> ' + req.session.currentUser)
         // redirect back to our home page
         res.redirect('/tools')
       } else {

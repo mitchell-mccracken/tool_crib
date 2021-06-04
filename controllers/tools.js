@@ -10,7 +10,6 @@ const isAuthenticated = (req , res, next) => {
         return next()
     } else {
         res.render('needlogin.ejs');
-        // res.send('You need to be logged in to do this')
     }
 }
 
@@ -18,26 +17,25 @@ const isAuthenticated = (req , res, next) => {
 //========================================
 //============== ROUTES ==================
 
-// redirect for heroku, I added this becuase my root was originally set up as /tools
+// landing page
 router.get('/' , (req , res) => {
     res.render('landingpage.ejs');
 })
 
-//login , I don't think I use this route ever
+//login page
 router.get('/login' , (req , res) => {
     res.render('login.ejs');
 })
 
 //index
 router.get('/tools' , (req , res) => {
-    console.log(req.session.currentUser);
     Tool.find({} , (error , allTools) => {
         if (error) {
             res.send(error)
         } else {
             res.render('index.ejs' , {
                 tools: allTools , 
-                currentUser: req.session.currentUser   //this kept coming back as undefined - this is now fixed
+                currentUser: req.session.currentUser
             })
         }
     })
@@ -76,11 +74,6 @@ router.put('/tools/:id' , isAuthenticated , (req , res) => {
 
 // ===================== CREATE ==========================
 router.post('/tools' , isAuthenticated , (req , res) => {
-    // console.log(req.body.notes);
-    // res.send(req.body.newTool);
-
-    //=== attempt to only allow if user is logged in ===
-
     if (req.body.newTool === 'on') {
         req.body.newTool = true;
     } else {
@@ -98,9 +91,7 @@ router.post('/tools' , isAuthenticated , (req , res) => {
 
 // ===================== SHOW ==========================
 router.get('/tools/:id' , (req , res) => {
-    console.log(req.params.id);
     Tool.findById(req.params.id , (error , selectedTool) => {
-        // res.send(selectedTool);
         res.render('show.ejs' , {
             tool: selectedTool,
             currentUser: req.session.currentUser 

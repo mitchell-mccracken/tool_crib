@@ -7,13 +7,12 @@ const User = require('../models/users.js');
 //================= ROUTES ======================
 //===============================================
 
+//create user
 users.get('/new', (req, res) => {
-    // res.send('page worked')
     res.render('createlogin.ejs')
-    console.log(req.query);
   })
 
-//index
+//index, I added this so I could see the users that are registered. In a scenario with sensitive data I would want this route to be password controlled or just removed.
 users.get('/' , (req , res) => {
     User.find({} , (error , allUsers) => {
         if (error) {
@@ -32,16 +31,12 @@ if ( req.body.userPassword1 === req.body.userPassword2) {
     if (err) {
         console.log(err);
     } else {
-        console.log('user is created', createdUser)
-        console.log(req.body);
-        console.log(req.body.userPassword1);
         res.redirect('/sessions/new')
             }
         })
 } else {
     res.send('Passwords do not match!')
-}
-
+    }
 })
   
 module.exports = users
